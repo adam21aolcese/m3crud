@@ -10,7 +10,7 @@ public class ConnexioBD {
 
     private Connection con = null;
     private String driver = "com.mysql.cj.jdbc.Driver";//Classe Driver
-    private String cadenaConnexio = "jdbc:mysql://localhost:3306/projecte_crud";
+    private String cadenaConnexio = "jdbc:mysql://localhost:3306/CRUD";
     private String usuari = "root";
     private String contrasenya = "1234";
 
@@ -112,12 +112,12 @@ public class ConnexioBD {
             //Ejectutamos la consulta y obtenemos el resultado
             registres = miConsulta.executeQuery(sql);
 
-            System.out.println("num_serie : tipus : color : dni");
+            System.out.println("n_serie : tipus : color : clau_persona");
             while (registres.next()) {
-                System.out.println(registres.getString("num_serie")
+                System.out.println(registres.getString("n_serie")
                         + "  : " + registres.getString("tipus")
                 + "  : " + registres.getString("color")
-                + "  : " + registres.getString("dni"));
+                + "  : " + registres.getString("clau_persona"));
 
             }
             System.out.println("Consulta realitzada correctament\n");
