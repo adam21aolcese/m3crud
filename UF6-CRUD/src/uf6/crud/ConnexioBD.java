@@ -112,10 +112,10 @@ public class ConnexioBD {
             //Ejectutamos la consulta y obtenemos el resultado
             registres = miConsulta.executeQuery(sql);
 
-            System.out.println("n_serie : tipus : color : clau_persona");
+            System.out.println("n_serie : tipus_instrument : color : clau_persona");
             while (registres.next()) {
                 System.out.println(registres.getString("n_serie")
-                        + "  : " + registres.getString("tipus")
+                        + "  : " + registres.getString("tipus_instrument")
                 + "  : " + registres.getString("color")
                 + "  : " + registres.getString("clau_persona"));
 
