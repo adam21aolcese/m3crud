@@ -88,11 +88,12 @@ public class ConnexioBD {
             //Ejectutamos la consulta y obtenemos el resultado
             registres = miConsulta.executeQuery(sql);
 
-            System.out.println("dni : nom : telefon");
+            System.out.println("dni : nom : telefon : id_banda");
             while (registres.next()) {
                 System.out.println(registres.getString("dni")
                         + "  : " + registres.getString("nom")
-                + "  : " + registres.getString("telefon"));
+                + "  : " + registres.getString("telefon")+ " : "
+                +registres.getString("id_banda"));
 
             }
             System.out.println("Consulta realitzada correctament\n");
@@ -139,21 +140,47 @@ public class ConnexioBD {
             System.out.println(ex.getMessage());
         }
     }
+    
+    public void consultaSelect3(String sql) {
 
-    public void consultaSelectPS(String sql) {
+        Statement miConsulta;
+        ResultSet registres;
+
+        try {
+            //Creamos un objeto Consulta
+            miConsulta = con.createStatement();
+            //Ejectutamos la consulta y obtenemos el resultado
+            registres = miConsulta.executeQuery(sql);
+
+            System.out.println("id_banda : nom_banda");
+            while (registres.next()) {
+                System.out.println(registres.getString("id_banda")
+                        + "  : " + registres.getString("nom_banda"));
+
+            }
+            System.out.println("Consulta realitzada correctament\n");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    
+
+    public void consultaSelectPS(String sql, String dni ) {
 
         PreparedStatement miConsulta;
         ResultSet registres;
 
         try {
             miConsulta = con.prepareStatement(sql);
-            //SELECT * FROM WHERE nif = ? AND nom = ?
-            miConsulta.setString(1, "3");
-            miConsulta.setString(2, "marta");
-            registres = miConsulta.executeQuery(sql);
+           
+            miConsulta.setString(1, dni);
+            registres = miConsulta.executeQuery();
             while (registres.next()) {
-                System.out.println(registres.getString("nif")
-                        + "  : " + registres.getString("nom"));
+                System.out.println(registres.getString("n_serie")
+                        + "  : " + registres.getString("tipus_instrument")+" : " + 
+                        registres.getString("color")+ " : "+
+                        registres.getString("clau_persona"));
 
             }
             System.out.println("Consulta realitzada correctament\n");
@@ -162,4 +189,27 @@ public class ConnexioBD {
         }
     }
 
+    public void consultaSelectPS2(String sql, String n_serie ) {
+
+        PreparedStatement miConsulta;
+        ResultSet registres;
+
+        try {
+            miConsulta = con.prepareStatement(sql);
+           
+            miConsulta.setString(1, n_serie);
+            registres = miConsulta.executeQuery();
+            while (registres.next()) {
+                System.out.println(registres.getString("dni")
+                        + "  : " + registres.getString("nom")+" : " + 
+                        registres.getString("telefon")+ " : "+
+                        registres.getString("id_banda"));
+
+            }
+            System.out.println("Consulta realitzada correctament\n");
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
 }
